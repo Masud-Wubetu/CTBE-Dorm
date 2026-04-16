@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --border: 226 232 240;
+    --primary: 59 130 246;
+    --primary-foreground: 255 255 255;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --glass-bg: 255 255 255 / 0.7;
+    --glass-border: 15 23 42 / 0.1;
+    --grid-color: 15 23 42 / 0.04;
+  }
+
+  .dark {
+    --background: 5 5 7;
+    --foreground: 255 255 255;
+    --card: 15 23 42;
+    --card-foreground: 255 255 255;
+    --border: 30 41 59;
+    --primary: 59 130 246;
+    --primary-foreground: 255 255 255;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
+    --glass-bg: 255 255 255 / 0.03;
+    --glass-border: 255 255 255 / 0.08;
+    --grid-color: 255 255 255 / 0.04;
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html,
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    @apply overflow-x-hidden transition-colors duration-300;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-md border shadow-lg transition-all duration-300;
+    background-color: rgba(var(--glass-bg));
+    border-color: rgba(var(--glass-border));
+  }
+
+  .dark .glass {
+    @apply shadow-[0_8px_32px_0_rgba(0,0,0,0.8)];
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:bg-white/10 hover:border-white/20 dark:hover:bg-white/[0.07] dark:hover:border-white/[0.15] hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold shadow-md
+           transition-all duration-300 hover:bg-blue-600 hover:scale-[1.02] 
+           cursor-pointer border-none font-[inherit];
+  }
+
+  .dark .btn-primary {
+    @apply shadow-[0_4px_14px_0_rgba(59,130,246,0.4)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.6)];
+  }
+
+  .btn-ghost {
+    @apply glass glass-hover px-6 py-3 rounded-lg font-semibold cursor-pointer border-none font-[inherit];
+    color: rgb(var(--foreground));
+  }
+
+  .badge-base {
+    @apply px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 w-fit border;
+  }
+
+  .badge-green { @apply badge-base bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20; }
+  .badge-blue { @apply badge-base bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20; }
+  .badge-red { @apply badge-base bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20; }
+  .badge-yellow { @apply badge-base bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20; }
+
+  .stat-card {
+    @apply bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] p-6 rounded-3xl shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5;
+  }
+
+  .input-premium {
+    @apply w-full bg-slate-50/50 dark:bg-white/[0.03] 
+           border border-slate-300 dark:border-white/10 
+           rounded-2xl px-5 py-4 outline-none transition-all duration-300
+           placeholder:text-slate-400 dark:placeholder:text-slate-500
+           focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 
+           hover:border-slate-400 dark:hover:border-white/20
+           text-slate-900 dark:text-white;
+  }
+
+  .card-premium {
+    @apply bg-white dark:bg-[#08080a] border border-slate-200 dark:border-white/[0.08] rounded-[2rem] shadow-2xl shadow-slate-200/50 dark:shadow-none overflow-hidden;
+  }
+
+  .glass-card {
+    @apply bg-white/70 dark:bg-white/[0.02] backdrop-blur-2xl border border-white/20 dark:border-white/[0.08] rounded-[2rem] shadow-2xl;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-br from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-transparent;
+  }
+
+  .bg-grid {
+    background-image: radial-gradient(circle at 1px 1px, rgba(var(--foreground), 0.05) 1px, transparent 0);
+    background-size: 32px 32px;
+  }
+
+  .section-label {
+    @apply text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em] mb-4 flex items-center gap-2;
+  }
+}
+
